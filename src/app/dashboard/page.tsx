@@ -18,7 +18,12 @@ import {
   Edit,
   Trash2,
   Clock,
-  Flag
+  Flag,
+  Folder,
+  FileText,
+  Image as ImageIcon,
+  Download,
+  Upload
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -34,6 +39,7 @@ export default function Dashboard() {
     { id: 'leads', label: 'Aanvragen & Leads', icon: Users },
     { id: 'performance', label: 'Website Performance', icon: Globe },
     { id: 'tasks', label: 'Taken', icon: CheckSquare },
+    { id: 'files', label: 'Bestanden', icon: Folder },
     { id: 'settings', label: 'Instellingen', icon: Settings },
   ];
 
@@ -53,6 +59,8 @@ export default function Dashboard() {
         return <PerformanceSection />;
       case 'tasks':
         return <TasksSection />;
+      case 'files':
+        return <FilesSection />;
       case 'settings':
         return <SettingsSection />;
       default:
@@ -866,6 +874,336 @@ function TasksSection() {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+// Files Section Component
+function FilesSection() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+
+  const files = [
+    {
+      id: 1,
+      name: 'Keuken_ontwerp_Amsterdam.pdf',
+      type: 'pdf',
+      size: '2.4 MB',
+      category: 'ontwerpen',
+      uploadDate: '2025-01-10',
+      lastModified: '2025-01-12',
+      uploadedBy: 'Jan Lentjes'
+    },
+    {
+      id: 2,
+      name: 'Showroom_foto_1.jpg',
+      type: 'image',
+      size: '1.8 MB',
+      category: 'fotos',
+      uploadDate: '2025-01-08',
+      lastModified: '2025-01-08',
+      uploadedBy: 'Marie de Vries'
+    },
+    {
+      id: 3,
+      name: 'Keuken_offerte_2025.xlsx',
+      type: 'excel',
+      size: '856 KB',
+      category: 'offertes',
+      uploadDate: '2025-01-05',
+      lastModified: '2025-01-07',
+      uploadedBy: 'Piet Pietersen'
+    },
+    {
+      id: 4,
+      name: 'Marketing_brochure.pdf',
+      type: 'pdf',
+      size: '3.2 MB',
+      category: 'marketing',
+      uploadDate: '2025-01-03',
+      lastModified: '2025-01-03',
+      uploadedBy: 'Marketing Team'
+    },
+    {
+      id: 5,
+      name: 'Keuken_installatie_handleiding.docx',
+      type: 'word',
+      size: '1.2 MB',
+      category: 'handleidingen',
+      uploadDate: '2024-12-28',
+      lastModified: '2025-01-02',
+      uploadedBy: 'Technisch Team'
+    },
+    {
+      id: 6,
+      name: 'Showroom_plattegrond.dwg',
+      type: 'cad',
+      size: '4.1 MB',
+      category: 'ontwerpen',
+      uploadDate: '2024-12-20',
+      lastModified: '2024-12-25',
+      uploadedBy: 'Jan Lentjes'
+    },
+    {
+      id: 7,
+      name: 'Klant_feedback_2024.pdf',
+      type: 'pdf',
+      size: '1.5 MB',
+      category: 'feedback',
+      uploadDate: '2024-12-15',
+      lastModified: '2024-12-15',
+      uploadedBy: 'Klantenservice'
+    },
+    {
+      id: 8,
+      name: 'Keuken_catalogus_2025.pdf',
+      type: 'pdf',
+      size: '8.7 MB',
+      category: 'catalogi',
+      uploadDate: '2024-12-10',
+      lastModified: '2024-12-10',
+      uploadedBy: 'Marketing Team'
+    }
+  ];
+
+  const categories = [
+    { id: 'all', name: 'Alle bestanden', count: files.length },
+    { id: 'ontwerpen', name: 'Ontwerpen', count: files.filter(f => f.category === 'ontwerpen').length },
+    { id: 'fotos', name: 'Foto&apos;s', count: files.filter(f => f.category === 'fotos').length },
+    { id: 'offertes', name: 'Offertes', count: files.filter(f => f.category === 'offertes').length },
+    { id: 'marketing', name: 'Marketing', count: files.filter(f => f.category === 'marketing').length },
+    { id: 'handleidingen', name: 'Handleidingen', count: files.filter(f => f.category === 'handleidingen').length },
+    { id: 'feedback', name: 'Feedback', count: files.filter(f => f.category === 'feedback').length },
+    { id: 'catalogi', name: 'Catalogus', count: files.filter(f => f.category === 'catalogi').length }
+  ];
+
+  const getFileIcon = (type: string) => {
+    switch (type) {
+      case 'pdf': return <FileText className="h-8 w-8 text-red-500" />;
+      case 'image': return <ImageIcon className="h-8 w-8 text-green-500" />;
+      case 'excel': return <FileText className="h-8 w-8 text-green-600" />;
+      case 'word': return <FileText className="h-8 w-8 text-blue-500" />;
+      case 'cad': return <FileText className="h-8 w-8 text-purple-500" />;
+      default: return <FileText className="h-8 w-8 text-gray-500" />;
+    }
+  };
+
+  const getFileTypeName = (type: string) => {
+    switch (type) {
+      case 'pdf': return 'PDF Document';
+      case 'image': return 'Afbeelding';
+      case 'excel': return 'Excel Bestand';
+      case 'word': return 'Word Document';
+      case 'cad': return 'CAD Bestand';
+      default: return 'Bestand';
+    }
+  };
+
+  const filteredFiles = files.filter(file => {
+    const matchesSearch = file.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'all' || file.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  const totalSize = files.reduce((acc, file) => {
+    const size = parseFloat(file.size.replace(' MB', '').replace(' KB', ''));
+    const unit = file.size.includes('MB') ? size : size / 1024;
+    return acc + unit;
+  }, 0);
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold text-black">Bestanden Beheer</h2>
+        <button className="flex items-center px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600 transition-colors">
+          <Upload size={20} className="mr-2" />
+          Bestand Uploaden
+        </button>
+      </div>
+
+      {/* Stats Overview */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-black">Totaal Bestanden</p>
+              <p className="text-2xl font-bold text-black">{files.length}</p>
+            </div>
+            <div className="p-3 bg-blue-100 rounded-lg">
+              <Folder className="h-6 w-6 text-blue-600" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-black">Totale Grootte</p>
+              <p className="text-2xl font-bold text-black">{totalSize.toFixed(1)} MB</p>
+            </div>
+            <div className="p-3 bg-green-100 rounded-lg">
+              <FileText className="h-6 w-6 text-green-600" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-black">Categorieën</p>
+              <p className="text-2xl font-bold text-black">{categories.length - 1}</p>
+            </div>
+            <div className="p-3 bg-purple-100 rounded-lg">
+              <Folder className="h-6 w-6 text-purple-600" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-black">Recent Geüpload</p>
+              <p className="text-2xl font-bold text-black">3</p>
+            </div>
+            <div className="p-3 bg-yellow-100 rounded-lg">
+              <Upload className="h-6 w-6 text-yellow-600" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Search and Filters */}
+      <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+        <div className="flex flex-col lg:flex-row gap-4">
+          {/* Search */}
+          <div className="flex-1">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Zoek bestanden..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          {/* Category Filter */}
+          <div className="lg:w-64">
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+            >
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name} ({category.count})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* View Mode Toggle */}
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`p-2 rounded-lg transition-colors ${
+                viewMode === 'grid' ? 'bg-yellow-500 text-black' : 'bg-gray-100 text-black hover:bg-gray-200'
+              }`}
+            >
+              <div className="grid grid-cols-2 gap-1">
+                <div className="w-2 h-2 bg-current rounded"></div>
+                <div className="w-2 h-2 bg-current rounded"></div>
+                <div className="w-2 h-2 bg-current rounded"></div>
+                <div className="w-2 h-2 bg-current rounded"></div>
+              </div>
+            </button>
+            <button
+              onClick={() => setViewMode('list')}
+              className={`p-2 rounded-lg transition-colors ${
+                viewMode === 'list' ? 'bg-yellow-500 text-black' : 'bg-gray-100 text-black hover:bg-gray-200'
+              }`}
+            >
+              <div className="space-y-1">
+                <div className="w-4 h-1 bg-current rounded"></div>
+                <div className="w-4 h-1 bg-current rounded"></div>
+                <div className="w-4 h-1 bg-current rounded"></div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Files Display */}
+      {viewMode === 'grid' ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredFiles.map((file) => (
+            <div key={file.id} className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-4">
+                  {getFileIcon(file.type)}
+                </div>
+                <h3 className="font-medium text-black mb-2 line-clamp-2">{file.name}</h3>
+                <p className="text-sm text-black mb-2">{getFileTypeName(file.type)}</p>
+                <p className="text-sm text-black mb-4">{file.size}</p>
+                <div className="flex items-center space-x-2">
+                  <button className="p-2 text-gray-400 hover:text-blue-600 rounded-lg hover:bg-blue-50">
+                    <Download className="h-4 w-4" />
+                  </button>
+                  <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                    <Edit className="h-4 w-4" />
+                  </button>
+                  <button className="p-2 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50">
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+          <div className="p-6 border-b border-gray-200">
+            <h3 className="text-lg font-semibold text-black">Bestanden Overzicht</h3>
+          </div>
+          <div className="divide-y divide-gray-200">
+            {filteredFiles.map((file) => (
+              <div key={file.id} className="p-6 hover:bg-gray-50 transition-colors">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div>
+                      {getFileIcon(file.type)}
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-black">{file.name}</h4>
+                      <p className="text-sm text-black">{getFileTypeName(file.type)} • {file.size}</p>
+                      <p className="text-xs text-black">Geüpload door {file.uploadedBy} op {new Date(file.uploadDate).toLocaleDateString('nl-NL')}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <button className="p-2 text-gray-400 hover:text-blue-600 rounded-lg hover:bg-blue-50">
+                      <Download className="h-4 w-4" />
+                    </button>
+                    <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                      <Edit className="h-4 w-4" />
+                    </button>
+                    <button className="p-2 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50">
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {filteredFiles.length === 0 && (
+        <div className="bg-white rounded-xl shadow-sm p-12 border border-gray-200 text-center">
+          <Folder className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+          <h3 className="text-lg font-medium text-black mb-2">Geen bestanden gevonden</h3>
+          <p className="text-black">Probeer andere zoektermen of filters.</p>
+        </div>
+      )}
     </div>
   );
 }
