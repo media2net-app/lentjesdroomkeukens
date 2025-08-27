@@ -139,7 +139,7 @@ function OverviewSection() {
   const stats = [
     { label: 'Website Bezoekers', value: '2,847', change: '+12.5%', icon: Eye, color: 'bg-blue-500' },
     { label: 'SEO Posities', value: 'Top 10', change: '+3 posities', icon: Search, color: 'bg-green-500' },
-    { label: 'SEA Clicks', value: '1,234', change: '+8.2%', icon: TrendingUp, color: 'bg-yellow-500' },
+    { label: 'SEA Clicks', value: '1234', change: '+8.2%', icon: TrendingUp, color: 'bg-yellow-500' },
     { label: 'Nieuwe Aanvragen', value: '47', change: '+15.3%', icon: Users, color: 'bg-purple-500' },
   ];
 
