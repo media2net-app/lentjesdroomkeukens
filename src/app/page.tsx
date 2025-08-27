@@ -23,7 +23,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center p-4">
       <div className="max-w-md w-full space-y-8">
         {/* Logo en titel */}
         <div className="text-center">
@@ -37,17 +37,17 @@ export default function LoginPage() {
               priority
             />
           </div>
-          <p className="text-gray-700">
+          <p className="text-gray-300">
             Welkom terug! Log in op uw account
           </p>
         </div>
 
         {/* Login formulier */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
+        <div className="bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-700">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Email veld */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                 E-mailadres
               </label>
               <div className="relative">
@@ -62,7 +62,7 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors bg-gray-700 text-white"
                   placeholder="uw@email.nl"
                 />
               </div>
@@ -70,7 +70,7 @@ export default function LoginPage() {
 
             {/* Wachtwoord veld */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
                 Wachtwoord
               </label>
               <div className="relative">
@@ -85,7 +85,7 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors"
+                  className="block w-full pl-10 pr-12 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors bg-gray-700 text-white"
                   placeholder="••••••••"
                 />
                 <button
@@ -94,9 +94,9 @@ export default function LoginPage() {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-300" />
                   ) : (
-                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-300" />
                   )}
                 </button>
               </div>
@@ -109,14 +109,14 @@ export default function LoginPage() {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-600 rounded bg-gray-700"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-300">
                   Onthoud mij
                 </label>
               </div>
               <div className="text-sm">
-                <a href="#" className="font-medium text-yellow-600 hover:text-yellow-500 transition-colors">
+                <a href="#" className="font-medium text-yellow-400 hover:text-yellow-300 transition-colors">
                   Wachtwoord vergeten?
                 </a>
               </div>
@@ -142,14 +142,14 @@ export default function LoginPage() {
           </form>
 
           {/* Demo credentials */}
-          <div className="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-            <p className="text-sm text-gray-700 mb-2">
+          <div className="mt-6 p-4 bg-gray-700 rounded-lg border border-gray-600">
+            <p className="text-sm text-gray-300 mb-2">
               <strong>Demo gegevens:</strong>
             </p>
-            <p className="text-xs text-black">
+            <p className="text-xs text-white">
               E-mail: demo@lentjesdroomkeukens.nl
             </p>
-            <p className="text-xs text-black">
+            <p className="text-xs text-white">
               Wachtwoord: L3ntj3sDr00mk3uk3ns2025!
             </p>
           </div>
@@ -157,7 +157,7 @@ export default function LoginPage() {
 
         {/* Footer */}
         <div className="text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-400">
             © 2025 Lentjes Droomkeukens. Alle rechten voorbehouden.
           </p>
         </div>
