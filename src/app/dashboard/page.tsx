@@ -23,7 +23,13 @@ import {
   FileText,
   Image as ImageIcon,
   Download,
-  Upload
+  Upload,
+  MapPin,
+  Calendar,
+  User,
+  Smartphone,
+  Monitor,
+  Building
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -38,6 +44,7 @@ export default function Dashboard() {
     { id: 'analytics', label: 'Website Analytics', icon: Eye },
     { id: 'leads', label: 'Aanvragen & Leads', icon: Users },
     { id: 'performance', label: 'Website Performance', icon: Globe },
+    { id: 'demographics', label: 'Demografie', icon: User },
     { id: 'tasks', label: 'Taken', icon: CheckSquare },
     { id: 'files', label: 'Bestanden', icon: Folder },
     { id: 'settings', label: 'Instellingen', icon: Settings },
@@ -57,6 +64,8 @@ export default function Dashboard() {
         return <LeadsSection />;
       case 'performance':
         return <PerformanceSection />;
+      case 'demographics':
+        return <DemographicsSection />;
       case 'tasks':
         return <TasksSection />;
       case 'files':
@@ -1243,6 +1252,275 @@ function SettingsSection() {
             <button className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300">
               <span className="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-1"></span>
             </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Demographics Section Component
+function DemographicsSection() {
+  const [selectedPeriod, setSelectedPeriod] = useState('30d');
+
+  const demographics = {
+    ageGroups: [
+      { age: '18-24', percentage: 8, visitors: 228 },
+      { age: '25-34', percentage: 22, visitors: 626 },
+      { age: '35-44', percentage: 35, visitors: 996 },
+      { age: '45-54', percentage: 25, visitors: 712 },
+      { age: '55-64', percentage: 8, visitors: 228 },
+      { age: '65+', percentage: 2, visitors: 57 }
+    ],
+    gender: [
+      { gender: 'Vrouwen', percentage: 68, visitors: 1936 },
+      { gender: 'Mannen', percentage: 32, visitors: 911 }
+    ],
+    locations: [
+      { city: 'Amsterdam', percentage: 45, visitors: 1281 },
+      { city: 'Rotterdam', percentage: 18, visitors: 512 },
+      { city: 'Den Haag', percentage: 12, visitors: 342 },
+      { city: 'Utrecht', percentage: 10, visitors: 285 },
+      { city: 'Eindhoven', percentage: 8, visitors: 228 },
+      { city: 'Overig', percentage: 7, visitors: 199 }
+    ],
+    devices: [
+      { device: 'Desktop', percentage: 52, visitors: 1480 },
+      { device: 'Mobile', percentage: 38, visitors: 1082 },
+      { device: 'Tablet', percentage: 10, visitors: 285 }
+    ],
+    interests: [
+      { interest: 'Keukenontwerp', percentage: 85, visitors: 2420 },
+      { interest: 'Keukenrenovatie', percentage: 72, visitors: 2050 },
+      { interest: 'Luxe keukens', percentage: 68, visitors: 1936 },
+      { interest: 'Keukenapparatuur', percentage: 45, visitors: 1281 },
+      { interest: 'Keukenaccessoires', percentage: 38, visitors: 1082 },
+      { interest: 'Duurzame keukens', percentage: 32, visitors: 911 }
+    ],
+    incomeLevels: [
+      { level: '€30k - €50k', percentage: 25, visitors: 712 },
+      { level: '€50k - €75k', percentage: 35, visitors: 996 },
+      { level: '€75k - €100k', percentage: 28, visitors: 797 },
+      { level: '€100k+', percentage: 12, visitors: 342 }
+    ]
+  };
+
+  const getBarColor = (index: number, total: number) => {
+    const colors = ['bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-purple-500', 'bg-red-500', 'bg-indigo-500'];
+    return colors[index % colors.length];
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold text-black">Demografie & Doelgroep</h2>
+        <select
+          value={selectedPeriod}
+          onChange={(e) => setSelectedPeriod(e.target.value)}
+          className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+        >
+          <option value="7d">Laatste 7 dagen</option>
+          <option value="30d">Laatste 30 dagen</option>
+          <option value="90d">Laatste 90 dagen</option>
+          <option value="1y">Laatste jaar</option>
+        </select>
+      </div>
+
+      {/* Key Metrics */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-black">Totaal Bezoekers</p>
+              <p className="text-2xl font-bold text-black">2,847</p>
+            </div>
+            <div className="p-3 bg-blue-100 rounded-lg">
+              <Users className="h-6 w-6 text-blue-600" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-black">Primaire Doelgroep</p>
+              <p className="text-2xl font-bold text-black">35-44</p>
+            </div>
+            <div className="p-3 bg-green-100 rounded-lg">
+              <User className="h-6 w-6 text-green-600" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-black">Top Locatie</p>
+              <p className="text-2xl font-bold text-black">Amsterdam</p>
+            </div>
+            <div className="p-3 bg-purple-100 rounded-lg">
+              <MapPin className="h-6 w-6 text-purple-600" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-black">Vrouwelijke Bezoekers</p>
+              <p className="text-2xl font-bold text-black">68%</p>
+            </div>
+            <div className="p-3 bg-pink-100 rounded-lg">
+              <User className="h-6 w-6 text-pink-600" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Demographics Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Age Distribution */}
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <h3 className="text-lg font-semibold text-black mb-4">Leeftijdsverdeling</h3>
+          <div className="space-y-3">
+            {demographics.ageGroups.map((age, index) => (
+              <div key={age.age}>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-sm font-medium text-black">{age.age} jaar</span>
+                  <span className="text-sm text-black">{age.percentage}% ({age.visitors})</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    className={`h-3 rounded-full ${getBarColor(index, demographics.ageGroups.length)}`}
+                    style={{ width: `${age.percentage}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Gender Distribution */}
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <h3 className="text-lg font-semibold text-black mb-4">Geslacht</h3>
+          <div className="space-y-3">
+            {demographics.gender.map((gender, index) => (
+              <div key={gender.gender}>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-sm font-medium text-black">{gender.gender}</span>
+                  <span className="text-sm text-black">{gender.percentage}% ({gender.visitors})</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    className={`h-3 rounded-full ${getBarColor(index, demographics.gender.length)}`}
+                    style={{ width: `${gender.percentage}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Geographic Distribution */}
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <h3 className="text-lg font-semibold text-black mb-4">Geografische Verdeling</h3>
+          <div className="space-y-3">
+            {demographics.locations.map((location, index) => (
+              <div key={location.city}>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-sm font-medium text-black">{location.city}</span>
+                  <span className="text-sm text-black">{location.percentage}% ({location.visitors})</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    className={`h-3 rounded-full ${getBarColor(index, demographics.locations.length)}`}
+                    style={{ width: `${location.percentage}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Device Usage */}
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <h3 className="text-lg font-semibold text-black mb-4">Apparaat Gebruik</h3>
+          <div className="space-y-3">
+            {demographics.devices.map((device, index) => (
+              <div key={device.device}>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-sm font-medium text-black">{device.device}</span>
+                  <span className="text-sm text-black">{device.percentage}% ({device.visitors})</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    className={`h-3 rounded-full ${getBarColor(index, demographics.devices.length)}`}
+                    style={{ width: `${device.percentage}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Interests and Income */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Interests */}
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <h3 className="text-lg font-semibold text-black mb-4">Interesses</h3>
+          <div className="space-y-3">
+            {demographics.interests.map((interest, index) => (
+              <div key={interest.interest}>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-sm font-medium text-black">{interest.interest}</span>
+                  <span className="text-sm text-black">{interest.percentage}%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div 
+                    className={`h-2 rounded-full ${getBarColor(index, demographics.interests.length)}`}
+                    style={{ width: `${interest.percentage}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Income Levels */}
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <h3 className="text-lg font-semibold text-black mb-4">Inkomensniveaus</h3>
+          <div className="space-y-3">
+            {demographics.incomeLevels.map((income, index) => (
+              <div key={income.level}>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-sm font-medium text-black">{income.level}</span>
+                  <span className="text-sm text-black">{income.percentage}% ({income.visitors})</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div 
+                    className={`h-2 rounded-full ${getBarColor(index, demographics.incomeLevels.length)}`}
+                    style={{ width: `${income.percentage}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Insights */}
+      <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+        <h3 className="text-lg font-semibold text-black mb-4">Doelgroep Inzichten</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="p-4 bg-blue-50 rounded-lg">
+            <h4 className="font-medium text-blue-800 mb-2">Primaire Doelgroep</h4>
+            <p className="text-sm text-blue-700">Vrouwen van 35-44 jaar in Amsterdam met een inkomen van €50k-€75k</p>
+          </div>
+          <div className="p-4 bg-green-50 rounded-lg">
+            <h4 className="font-medium text-green-800 mb-2">Device Strategie</h4>
+            <p className="text-sm text-green-700">Focus op desktop ervaring (52%), maar mobile optimalisatie blijft belangrijk</p>
+          </div>
+          <div className="p-4 bg-yellow-50 rounded-lg">
+            <h4 className="font-medium text-yellow-800 mb-2">Content Focus</h4>
+            <p className="text-sm text-yellow-700">Keukenontwerp en renovatie content scoren het hoogst bij bezoekers</p>
           </div>
         </div>
       </div>
