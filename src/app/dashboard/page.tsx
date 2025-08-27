@@ -208,7 +208,7 @@ function OverviewSection() {
               { name: 'Piet Pietersen', type: 'Afspraak showroom', date: '4 uur geleden', status: 'Bevestigd' },
               { name: 'Marie de Vries', type: 'Keuken ontwerp', date: '1 dag geleden', status: 'In behandeling' },
             ].map((lead, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div key={index} className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
                 <div>
                   <p className="font-medium text-white">{lead.name}</p>
                   <p className="text-sm text-white">{lead.type}</p>
@@ -216,9 +216,9 @@ function OverviewSection() {
                 <div className="text-right">
                   <p className="text-sm text-white">{lead.date}</p>
                   <span className={`inline-block px-2 py-1 text-xs rounded-full ${
-                    lead.status === 'Nieuw' ? 'bg-green-100 text-green-800' :
-                    lead.status === 'Bevestigd' ? 'bg-blue-100 text-blue-800' :
-                    'bg-yellow-100 text-yellow-800'
+                    lead.status === 'Nieuw' ? 'bg-green-900 text-green-300' :
+                    lead.status === 'Bevestigd' ? 'bg-blue-900 text-blue-300' :
+                    'bg-yellow-900 text-yellow-300'
                   }`}>
                     {lead.status}
                   </span>
@@ -387,14 +387,14 @@ function SEASection() {
               { name: 'Droomkeukens', status: 'Actief', budget: '€300/dag', clicks: 156 },
               { name: 'Keuken Showroom', status: 'Paused', budget: '€200/dag', clicks: 89 },
             ].map((campaign, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div key={index} className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
                 <div>
                   <p className="font-medium text-white">{campaign.name}</p>
                   <p className="text-sm text-white">{campaign.budget}</p>
                 </div>
                 <div className="text-right">
                   <span className={`inline-block px-2 py-1 text-xs rounded-full ${
-                    campaign.status === 'Actief' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                    campaign.status === 'Actief' ? 'bg-green-900 text-green-300' : 'bg-yellow-900 text-yellow-300'
                   }`}>
                     {campaign.status}
                   </span>
@@ -475,7 +475,7 @@ function AnalyticsSection() {
                   <span className="text-sm font-medium text-white">{item.source}</span>
                   <span className="text-sm text-white">{item.percentage}%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-gray-600 rounded-full h-2">
                   <div 
                     className={`h-2 rounded-full ${item.color}`}
                     style={{ width: `${item.percentage}%` }}
@@ -541,15 +541,15 @@ function LeadsSection() {
               { name: 'Klaas Klaassen', type: 'Keuken renovatie', source: 'Website', status: 'Nieuw', time: '1 dag geleden' },
               { name: 'Anna van der Berg', type: 'Keuken offerte', source: 'Social Media', status: 'Gekwalificeerd', time: '2 dagen geleden' },
             ].map((lead, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div key={index} className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
                     <p className="font-medium text-white">{lead.name}</p>
                     <span className={`inline-block px-2 py-1 text-xs rounded-full ${
-                      lead.status === 'Nieuw' ? 'bg-green-100 text-green-800' :
-                      lead.status === 'Bevestigd' ? 'bg-blue-100 text-blue-800' :
-                      lead.status === 'In behandeling' ? 'bg-yellow-100 text-yellow-800' :
-                      'bg-purple-100 text-purple-800'
+                      lead.status === 'Nieuw' ? 'bg-green-900 text-green-300' :
+                      lead.status === 'Bevestigd' ? 'bg-blue-900 text-blue-300' :
+                      lead.status === 'In behandeling' ? 'bg-yellow-900 text-yellow-300' :
+                      'bg-purple-900 text-purple-300'
                     }`}>
                       {lead.status}
                     </span>
@@ -620,7 +620,7 @@ function PerformanceSection() {
               { item: 'Meta Tags', status: 'Complete', score: '100%' },
               { item: 'Schema Markup', status: 'Present', score: '85%' },
             ].map((item, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div key={index} className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
                 <div>
                   <p className="font-medium text-white">{item.item}</p>
                   <p className="text-sm text-white">{item.status}</p>
@@ -704,18 +704,18 @@ function TasksSection() {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'high': return 'bg-red-100 text-red-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'low': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'medium': return 'bg-yellow-900 text-yellow-300';
+      case 'low': return 'bg-green-900 text-green-300';
+      default: return 'bg-gray-700 text-white';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'bg-green-100 text-green-800';
-      case 'in-progress': return 'bg-blue-100 text-blue-800';
-      case 'pending': return 'bg-gray-100 text-gray-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'completed': return 'bg-green-900 text-green-300';
+      case 'in-progress': return 'bg-blue-900 text-blue-300';
+      case 'pending': return 'bg-gray-700 text-white';
+      default: return 'bg-gray-700 text-white';
     }
   };
 
@@ -751,7 +751,7 @@ function TasksSection() {
               <p className="text-sm font-medium text-white">Totaal</p>
               <p className="text-2xl font-bold text-white">{totalTasks}</p>
             </div>
-            <div className="p-3 bg-gray-100 rounded-lg">
+            <div className="p-3 bg-gray-700 rounded-lg">
               <CheckSquare className="h-6 w-6 text-gray-600" />
             </div>
           </div>
@@ -762,7 +762,7 @@ function TasksSection() {
               <p className="text-sm font-medium text-white">Voltooid</p>
               <p className="text-2xl font-bold text-green-600">{completedTasks}</p>
             </div>
-            <div className="p-3 bg-green-100 rounded-lg">
+            <div className="p-3 bg-green-900 rounded-lg">
               <CheckSquare className="h-6 w-6 text-green-600" />
             </div>
           </div>
@@ -773,7 +773,7 @@ function TasksSection() {
               <p className="text-sm font-medium text-white">In Uitvoering</p>
               <p className="text-2xl font-bold text-blue-600">{tasks.filter(t => t.status === 'in-progress').length}</p>
             </div>
-            <div className="p-3 bg-blue-100 rounded-lg">
+            <div className="p-3 bg-blue-900 rounded-lg">
               <Clock className="h-6 w-6 text-blue-600" />
             </div>
           </div>
@@ -784,7 +784,7 @@ function TasksSection() {
               <p className="text-sm font-medium text-white">Openstaand</p>
               <p className="text-2xl font-bold text-yellow-600">{tasks.filter(t => t.status === 'pending').length}</p>
             </div>
-            <div className="p-3 bg-yellow-100 rounded-lg">
+            <div className="p-3 bg-yellow-900 rounded-lg">
               <Square className="h-6 w-6 text-yellow-600" />
             </div>
           </div>
@@ -797,7 +797,7 @@ function TasksSection() {
           <button
             onClick={() => setFilter('all')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              filter === 'all' ? 'bg-yellow-500 text-white' : 'bg-gray-100 text-white hover:bg-gray-200'
+              filter === 'all' ? 'bg-yellow-500 text-white' : 'bg-gray-700 text-white hover:bg-gray-600'
             }`}
           >
             Alle Taken
@@ -805,7 +805,7 @@ function TasksSection() {
           <button
             onClick={() => setFilter('pending')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              filter === 'pending' ? 'bg-yellow-500 text-white' : 'bg-gray-100 text-white hover:bg-gray-200'
+              filter === 'pending' ? 'bg-yellow-500 text-white' : 'bg-gray-700 text-white hover:bg-gray-600'
             }`}
           >
             Openstaand
@@ -813,7 +813,7 @@ function TasksSection() {
           <button
             onClick={() => setFilter('in-progress')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              filter === 'in-progress' ? 'bg-yellow-500 text-white' : 'bg-gray-100 text-white hover:bg-gray-200'
+              filter === 'in-progress' ? 'bg-yellow-500 text-white' : 'bg-gray-700 text-white hover:bg-gray-600'
             }`}
           >
             In Uitvoering
@@ -821,7 +821,7 @@ function TasksSection() {
           <button
             onClick={() => setFilter('completed')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              filter === 'completed' ? 'bg-yellow-500 text-white' : 'bg-gray-100 text-white hover:bg-gray-200'
+              filter === 'completed' ? 'bg-yellow-500 text-white' : 'bg-gray-700 text-white hover:bg-gray-600'
             }`}
           >
             Voltooid
@@ -830,13 +830,13 @@ function TasksSection() {
       </div>
 
       {/* Tasks List */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+      <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700">
         <div className="p-6 border-b border-gray-200">
           <h3 className="text-lg font-semibold text-white">Taken Overzicht</h3>
         </div>
         <div className="divide-y divide-gray-200">
           {filteredTasks.map((task) => (
-            <div key={task.id} className="p-6 hover:bg-gray-50 transition-colors">
+            <div key={task.id} className="p-6 hover:bg-gray-700 transition-colors">
               <div className="flex items-start justify-between">
                 <div className="flex items-start space-x-4 flex-1">
                   <button
@@ -846,7 +846,7 @@ function TasksSection() {
                     {task.status === 'completed' ? (
                       <CheckSquare className="h-5 w-5 text-green-600" />
                     ) : (
-                      <Square className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                      <Square className="h-5 w-5 text-gray-400 hover:text-gray-300" />
                     )}
                   </button>
                   <div className="flex-1">
@@ -881,7 +881,7 @@ function TasksSection() {
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                  <button className="p-2 text-gray-400 hover:text-gray-300 rounded-lg hover:bg-gray-600">
                     <Edit className="h-4 w-4" />
                   </button>
                   <button className="p-2 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50">
@@ -1049,7 +1049,7 @@ function FilesSection() {
               <p className="text-sm font-medium text-white">Totaal Bestanden</p>
               <p className="text-2xl font-bold text-white">{files.length}</p>
             </div>
-            <div className="p-3 bg-blue-100 rounded-lg">
+            <div className="p-3 bg-blue-900 rounded-lg">
               <Folder className="h-6 w-6 text-blue-600" />
             </div>
           </div>
@@ -1060,7 +1060,7 @@ function FilesSection() {
               <p className="text-sm font-medium text-white">Totale Grootte</p>
               <p className="text-2xl font-bold text-white">{totalSize.toFixed(1)} MB</p>
             </div>
-            <div className="p-3 bg-green-100 rounded-lg">
+            <div className="p-3 bg-green-900 rounded-lg">
               <FileText className="h-6 w-6 text-green-600" />
             </div>
           </div>
@@ -1071,7 +1071,7 @@ function FilesSection() {
               <p className="text-sm font-medium text-white">Categorieën</p>
               <p className="text-2xl font-bold text-white">{categories.length - 1}</p>
             </div>
-            <div className="p-3 bg-purple-100 rounded-lg">
+            <div className="p-3 bg-purple-900 rounded-lg">
               <Folder className="h-6 w-6 text-purple-600" />
             </div>
           </div>
@@ -1082,7 +1082,7 @@ function FilesSection() {
               <p className="text-sm font-medium text-white">Recent Geüpload</p>
               <p className="text-2xl font-bold text-white">3</p>
             </div>
-            <div className="p-3 bg-yellow-100 rounded-lg">
+            <div className="p-3 bg-yellow-900 rounded-lg">
               <Upload className="h-6 w-6 text-yellow-600" />
             </div>
           </div>
@@ -1126,7 +1126,7 @@ function FilesSection() {
             <button
               onClick={() => setViewMode('grid')}
               className={`p-2 rounded-lg transition-colors ${
-                viewMode === 'grid' ? 'bg-yellow-500 text-white' : 'bg-gray-100 text-white hover:bg-gray-200'
+                viewMode === 'grid' ? 'bg-yellow-500 text-white' : 'bg-gray-700 text-white hover:bg-gray-600'
               }`}
             >
               <div className="grid grid-cols-2 gap-1">
@@ -1139,7 +1139,7 @@ function FilesSection() {
             <button
               onClick={() => setViewMode('list')}
               className={`p-2 rounded-lg transition-colors ${
-                viewMode === 'list' ? 'bg-yellow-500 text-white' : 'bg-gray-100 text-white hover:bg-gray-200'
+                viewMode === 'list' ? 'bg-yellow-500 text-white' : 'bg-gray-700 text-white hover:bg-gray-600'
               }`}
             >
               <div className="space-y-1">
@@ -1168,7 +1168,7 @@ function FilesSection() {
                   <button className="p-2 text-gray-400 hover:text-blue-600 rounded-lg hover:bg-blue-50">
                     <Download className="h-4 w-4" />
                   </button>
-                  <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                  <button className="p-2 text-gray-400 hover:text-gray-300 rounded-lg hover:bg-gray-600">
                     <Edit className="h-4 w-4" />
                   </button>
                   <button className="p-2 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50">
@@ -1180,13 +1180,13 @@ function FilesSection() {
           ))}
         </div>
       ) : (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+        <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700">
           <div className="p-6 border-b border-gray-200">
             <h3 className="text-lg font-semibold text-white">Bestanden Overzicht</h3>
           </div>
           <div className="divide-y divide-gray-200">
             {filteredFiles.map((file) => (
-              <div key={file.id} className="p-6 hover:bg-gray-50 transition-colors">
+              <div key={file.id} className="p-6 hover:bg-gray-700 transition-colors">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div>
@@ -1202,7 +1202,7 @@ function FilesSection() {
                     <button className="p-2 text-gray-400 hover:text-blue-600 rounded-lg hover:bg-blue-50">
                       <Download className="h-4 w-4" />
                     </button>
-                    <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                    <button className="p-2 text-gray-400 hover:text-gray-300 rounded-lg hover:bg-gray-600">
                       <Edit className="h-4 w-4" />
                     </button>
                     <button className="p-2 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50">
@@ -1250,7 +1250,7 @@ function SettingsSection() {
               <p className="font-medium text-white">Automatische updates</p>
               <p className="text-sm text-white">Update data elke 6 uur</p>
             </div>
-            <button className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300">
+            <button className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-600">
               <span className="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-1"></span>
             </button>
           </div>
@@ -1259,7 +1259,7 @@ function SettingsSection() {
               <p className="font-medium text-white">Dark mode</p>
               <p className="text-sm text-white">Schakel donkere modus in</p>
             </div>
-            <button className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300">
+            <button className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-600">
               <span className="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-1"></span>
             </button>
           </div>
@@ -1344,7 +1344,7 @@ function DemographicsSection() {
               <p className="text-sm font-medium text-white">Totaal Bezoekers</p>
               <p className="text-2xl font-bold text-white">2,847</p>
             </div>
-            <div className="p-3 bg-blue-100 rounded-lg">
+            <div className="p-3 bg-blue-900 rounded-lg">
               <Users className="h-6 w-6 text-blue-600" />
             </div>
           </div>
@@ -1355,7 +1355,7 @@ function DemographicsSection() {
               <p className="text-sm font-medium text-white">Primaire Doelgroep</p>
               <p className="text-2xl font-bold text-white">35-44</p>
             </div>
-            <div className="p-3 bg-green-100 rounded-lg">
+            <div className="p-3 bg-green-900 rounded-lg">
               <User className="h-6 w-6 text-green-600" />
             </div>
           </div>
@@ -1366,7 +1366,7 @@ function DemographicsSection() {
               <p className="text-sm font-medium text-white">Top Locatie</p>
               <p className="text-2xl font-bold text-white">Amsterdam</p>
             </div>
-            <div className="p-3 bg-purple-100 rounded-lg">
+            <div className="p-3 bg-purple-900 rounded-lg">
               <MapPin className="h-6 w-6 text-purple-600" />
             </div>
           </div>
@@ -1377,7 +1377,7 @@ function DemographicsSection() {
               <p className="text-sm font-medium text-white">Vrouwelijke Bezoekers</p>
               <p className="text-2xl font-bold text-white">68%</p>
             </div>
-            <div className="p-3 bg-pink-100 rounded-lg">
+            <div className="p-3 bg-pink-900 rounded-lg">
               <User className="h-6 w-6 text-pink-600" />
             </div>
           </div>
@@ -1396,7 +1396,7 @@ function DemographicsSection() {
                   <span className="text-sm font-medium text-white">{age.age} jaar</span>
                   <span className="text-sm text-white">{age.percentage}% ({age.visitors})</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-3">
+                <div className="w-full bg-gray-600 rounded-full h-3">
                   <div 
                     className={`h-3 rounded-full ${getBarColor(index, demographics.ageGroups.length)}`}
                     style={{ width: `${age.percentage}%` }}
@@ -1417,7 +1417,7 @@ function DemographicsSection() {
                   <span className="text-sm font-medium text-white">{gender.gender}</span>
                   <span className="text-sm text-white">{gender.percentage}% ({gender.visitors})</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-3">
+                <div className="w-full bg-gray-600 rounded-full h-3">
                   <div 
                     className={`h-3 rounded-full ${getBarColor(index, demographics.gender.length)}`}
                     style={{ width: `${gender.percentage}%` }}
@@ -1438,7 +1438,7 @@ function DemographicsSection() {
                   <span className="text-sm font-medium text-white">{location.city}</span>
                   <span className="text-sm text-white">{location.percentage}% ({location.visitors})</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-3">
+                <div className="w-full bg-gray-600 rounded-full h-3">
                   <div 
                     className={`h-3 rounded-full ${getBarColor(index, demographics.locations.length)}`}
                     style={{ width: `${location.percentage}%` }}
@@ -1459,7 +1459,7 @@ function DemographicsSection() {
                   <span className="text-sm font-medium text-white">{device.device}</span>
                   <span className="text-sm text-white">{device.percentage}% ({device.visitors})</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-3">
+                <div className="w-full bg-gray-600 rounded-full h-3">
                   <div 
                     className={`h-3 rounded-full ${getBarColor(index, demographics.devices.length)}`}
                     style={{ width: `${device.percentage}%` }}
@@ -1483,7 +1483,7 @@ function DemographicsSection() {
                   <span className="text-sm font-medium text-white">{interest.interest}</span>
                   <span className="text-sm text-white">{interest.percentage}%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-gray-600 rounded-full h-2">
                   <div 
                     className={`h-2 rounded-full ${getBarColor(index, demographics.interests.length)}`}
                     style={{ width: `${interest.percentage}%` }}
@@ -1504,7 +1504,7 @@ function DemographicsSection() {
                   <span className="text-sm font-medium text-white">{income.level}</span>
                   <span className="text-sm text-white">{income.percentage}% ({income.visitors})</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-gray-600 rounded-full h-2">
                   <div 
                     className={`h-2 rounded-full ${getBarColor(index, demographics.incomeLevels.length)}`}
                     style={{ width: `${income.percentage}%` }}
@@ -1623,10 +1623,10 @@ function APISection() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-green-100 text-green-800';
+      case 'active': return 'bg-green-900 text-green-300';
       case 'disconnected': return 'bg-red-100 text-red-800';
-      case 'error': return 'bg-yellow-100 text-yellow-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'error': return 'bg-yellow-900 text-yellow-300';
+      default: return 'bg-gray-700 text-white';
     }
   };
 
@@ -1692,7 +1692,7 @@ function APISection() {
                 {Object.values(connections).filter(c => c.connected).length}
               </p>
             </div>
-            <div className="p-3 bg-green-100 rounded-lg">
+            <div className="p-3 bg-green-900 rounded-lg">
               <Link className="h-6 w-6 text-green-600" />
             </div>
           </div>
@@ -1705,7 +1705,7 @@ function APISection() {
                 {Object.values(connections).reduce((sum, c) => sum + c.dataPoints, 0)}
               </p>
             </div>
-            <div className="p-3 bg-blue-100 rounded-lg">
+            <div className="p-3 bg-blue-900 rounded-lg">
               <Database className="h-6 w-6 text-blue-600" />
             </div>
           </div>
@@ -1718,7 +1718,7 @@ function APISection() {
                 {new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}
               </p>
             </div>
-            <div className="p-3 bg-purple-100 rounded-lg">
+            <div className="p-3 bg-purple-900 rounded-lg">
               <RefreshCw className="h-6 w-6 text-purple-600" />
             </div>
           </div>
@@ -1782,7 +1782,7 @@ function APISection() {
                   <>
                     <button
                       onClick={() => handleRefresh(service.id)}
-                      className="flex items-center px-3 py-2 text-sm bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors"
+                      className="flex items-center px-3 py-2 text-sm bg-blue-900 text-blue-300 rounded-lg hover:bg-blue-800 transition-colors"
                     >
                       <RefreshCw className="h-4 w-4 mr-1" />
                       Vernieuwen
@@ -1798,7 +1798,7 @@ function APISection() {
                 ) : (
                   <button
                     onClick={() => handleConnect(service.id)}
-                    className="flex items-center px-3 py-2 text-sm bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
+                    className="flex items-center px-3 py-2 text-sm bg-green-900 text-green-300 rounded-lg hover:bg-green-800 transition-colors"
                   >
                     <Link className="h-4 w-4 mr-1" />
                     Koppelen
@@ -1872,7 +1872,7 @@ function APISection() {
       {/* Connection Modal */}
       {showConnectModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-6 max-w-md w-full mx-4">
+          <div className="bg-gray-800 rounded-xl p-6 max-w-md w-full mx-4 border border-gray-700">
             <h3 className="text-lg font-semibold text-white mb-4">
               Koppel {selectedService ? services.find(s => s.id === selectedService)?.name : 'Service'}
             </h3>
@@ -1882,7 +1882,7 @@ function APISection() {
                 <input
                   type="password"
                   placeholder="Voer uw API key in"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-gray-700 text-white"
                 />
               </div>
               <div>
@@ -1890,11 +1890,11 @@ function APISection() {
                 <input
                   type="text"
                   placeholder="Voer uw account ID in"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-gray-700 text-white"
                 />
               </div>
               <div className="flex items-center space-x-2">
-                <input type="checkbox" id="autoSync" className="rounded" />
+                <input type="checkbox" id="autoSync" className="rounded bg-gray-700 border-gray-600" />
                 <label htmlFor="autoSync" className="text-sm text-white">
                   Automatische synchronisatie inschakelen
                 </label>
@@ -1903,7 +1903,7 @@ function APISection() {
             <div className="flex items-center justify-end space-x-3 mt-6">
               <button
                 onClick={() => setShowConnectModal(false)}
-                className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                className="px-4 py-2 text-sm bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
               >
                 Annuleren
               </button>
