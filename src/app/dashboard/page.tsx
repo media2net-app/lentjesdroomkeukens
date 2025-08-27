@@ -104,7 +104,7 @@ export default function Dashboard() {
                   className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
                     activeSection === item.id
                       ? 'bg-yellow-500 text-black'
-                      : 'text-gray-700 hover:bg-yellow-50 hover:text-black'
+                      : 'text-black hover:bg-yellow-50 hover:text-black'
                   }`}
                 >
                   <Icon size={20} className="mr-3" />
@@ -116,7 +116,7 @@ export default function Dashboard() {
 
           {/* Logout */}
           <div className="p-4 border-t border-gray-200">
-            <button className="w-full flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg transition-colors">
+            <button className="w-full flex items-center px-4 py-3 text-sm font-medium text-black hover:bg-red-50 hover:text-red-600 rounded-lg transition-colors">
               <LogOut size={20} className="mr-3" />
               Uitloggen
             </button>
@@ -146,8 +146,8 @@ function OverviewSection() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900">Dashboard Overzicht</h2>
-        <div className="text-sm text-gray-500">Laatste update: {new Date().toLocaleDateString('nl-NL')}</div>
+        <h2 className="text-2xl font-bold text-black">Dashboard Overzicht</h2>
+        <div className="text-sm text-black">Laatste update: {new Date().toLocaleDateString('nl-NL')}</div>
       </div>
 
       {/* Stats Grid */}
@@ -158,8 +158,8 @@ function OverviewSection() {
             <div key={index} className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">{stat.label}</p>
-                  <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
+                  <p className="text-sm font-medium text-black">{stat.label}</p>
+                  <p className="text-2xl font-bold text-black mt-1">{stat.value}</p>
                   <p className="text-sm text-green-600 mt-1">{stat.change}</p>
                 </div>
                 <div className={`p-3 rounded-lg ${stat.color}`}>
@@ -174,7 +174,7 @@ function OverviewSection() {
       {/* Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Recente Aanvragen</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Recente Aanvragen</h3>
           <div className="space-y-3">
             {[
               { name: 'Jan Jansen', type: 'Keuken offerte', date: '2 uur geleden', status: 'Nieuw' },
@@ -183,11 +183,11 @@ function OverviewSection() {
             ].map((lead, index) => (
               <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div>
-                  <p className="font-medium text-gray-900">{lead.name}</p>
-                  <p className="text-sm text-gray-600">{lead.type}</p>
+                  <p className="font-medium text-black">{lead.name}</p>
+                  <p className="text-sm text-black">{lead.type}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-gray-500">{lead.date}</p>
+                  <p className="text-sm text-black">{lead.date}</p>
                   <span className={`inline-block px-2 py-1 text-xs rounded-full ${
                     lead.status === 'Nieuw' ? 'bg-green-100 text-green-800' :
                     lead.status === 'Bevestigd' ? 'bg-blue-100 text-blue-800' :
@@ -202,7 +202,7 @@ function OverviewSection() {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">SEO Prestaties</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">SEO Prestaties</h3>
           <div className="space-y-4">
             {[
               { keyword: 'keukens amsterdam', position: 3, change: '+2' },
@@ -212,12 +212,12 @@ function OverviewSection() {
             ].map((keyword, index) => (
               <div key={index} className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium text-gray-900">{keyword.keyword}</p>
-                  <p className="text-sm text-gray-600">Positie: {keyword.position}</p>
+                  <p className="font-medium text-black">{keyword.keyword}</p>
+                  <p className="text-sm text-black">Positie: {keyword.position}</p>
                 </div>
                 <span className={`text-sm font-medium ${
                   keyword.change.startsWith('+') ? 'text-green-600' :
-                  keyword.change.startsWith('-') ? 'text-red-600' : 'text-gray-600'
+                  keyword.change.startsWith('-') ? 'text-red-600' : 'text-black'
                 }`}>
                   {keyword.change}
                 </span>
@@ -234,33 +234,33 @@ function OverviewSection() {
 function SEOSection() {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-900">SEO Performance</h2>
+      <h2 className="text-2xl font-bold text-black">SEO Performance</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Google Search Console</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Google Search Console</h3>
           <div className="space-y-4">
             <div className="flex justify-between">
-              <span className="text-gray-600">Gemiddelde positie</span>
+              <span className="text-black">Gemiddelde positie</span>
               <span className="font-semibold">4.2</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Clicks (30 dagen)</span>
+              <span className="text-black">Clicks (30 dagen)</span>
               <span className="font-semibold">1,847</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Impressies</span>
+              <span className="text-black">Impressies</span>
               <span className="font-semibold">45,230</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">CTR</span>
+              <span className="text-black">CTR</span>
               <span className="font-semibold">4.1%</span>
             </div>
           </div>
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Keywords</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Top Keywords</h3>
           <div className="space-y-3">
             {[
               { keyword: 'keukens amsterdam', position: 3, volume: '2.4K' },
@@ -271,17 +271,17 @@ function SEOSection() {
             ].map((item, index) => (
               <div key={index} className="flex justify-between items-center">
                 <div>
-                  <p className="font-medium text-gray-900">{item.keyword}</p>
-                  <p className="text-sm text-gray-600">Positie {item.position}</p>
+                  <p className="font-medium text-black">{item.keyword}</p>
+                  <p className="text-sm text-black">Positie {item.position}</p>
                 </div>
-                <span className="text-sm text-gray-500">{item.volume}</span>
+                <span className="text-sm text-black">{item.volume}</span>
               </div>
             ))}
           </div>
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">SEO Issues</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">SEO Issues</h3>
           <div className="space-y-3">
             <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
               <div>
@@ -315,11 +315,11 @@ function SEOSection() {
 function SEASection() {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-900">SEA Campagnes</h2>
+      <h2 className="text-2xl font-bold text-black">SEA Campagnes</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Google Ads Overzicht</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Google Ads Overzicht</h3>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center p-4 bg-blue-50 rounded-lg">
@@ -333,19 +333,19 @@ function SEASection() {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-gray-600">Clicks</span>
+                <span className="text-black">Clicks</span>
                 <span className="font-semibold">1234</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Impressies</span>
+                <span className="text-black">Impressies</span>
                 <span className="font-semibold">45,230</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">CTR</span>
+                <span className="text-black">CTR</span>
                 <span className="font-semibold">2.7%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">CPC</span>
+                <span className="text-black">CPC</span>
                 <span className="font-semibold">€2.31</span>
               </div>
             </div>
@@ -353,7 +353,7 @@ function SEASection() {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Actieve Campagnes</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Actieve Campagnes</h3>
           <div className="space-y-3">
             {[
               { name: 'Keukens Amsterdam', status: 'Actief', budget: '€500/dag', clicks: 234 },
@@ -362,8 +362,8 @@ function SEASection() {
             ].map((campaign, index) => (
               <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div>
-                  <p className="font-medium text-gray-900">{campaign.name}</p>
-                  <p className="text-sm text-gray-600">{campaign.budget}</p>
+                  <p className="font-medium text-black">{campaign.name}</p>
+                  <p className="text-sm text-black">{campaign.budget}</p>
                 </div>
                 <div className="text-right">
                   <span className={`inline-block px-2 py-1 text-xs rounded-full ${
@@ -371,7 +371,7 @@ function SEASection() {
                   }`}>
                     {campaign.status}
                   </span>
-                  <p className="text-sm text-gray-600 mt-1">{campaign.clicks} clicks</p>
+                  <p className="text-sm text-black mt-1">{campaign.clicks} clicks</p>
                 </div>
               </div>
             ))}
@@ -386,27 +386,27 @@ function SEASection() {
 function AnalyticsSection() {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-900">Website Analytics</h2>
+      <h2 className="text-2xl font-bold text-black">Website Analytics</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Bezoekers Overzicht</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Bezoekers Overzicht</h3>
           <div className="space-y-4">
             <div className="text-center">
-              <p className="text-3xl font-bold text-gray-900">2,847</p>
-              <p className="text-sm text-gray-600">Bezoekers (30 dagen)</p>
+              <p className="text-3xl font-bold text-black">2,847</p>
+              <p className="text-sm text-black">Bezoekers (30 dagen)</p>
             </div>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-gray-600">Unieke bezoekers</span>
+                <span className="text-black">Unieke bezoekers</span>
                 <span className="font-semibold">2,123</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Paginaweergaven</span>
+                <span className="text-black">Paginaweergaven</span>
                 <span className="font-semibold">8,456</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Gem. sessieduur</span>
+                <span className="text-black">Gem. sessieduur</span>
                 <span className="font-semibold">2:34</span>
               </div>
             </div>
@@ -414,7 +414,7 @@ function AnalyticsSection() {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Pagina&apos;s</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Top Pagina&apos;s</h3>
           <div className="space-y-3">
             {[
               { page: '/', views: 1234, bounce: '45%' },
@@ -425,17 +425,17 @@ function AnalyticsSection() {
             ].map((item, index) => (
               <div key={index} className="flex justify-between items-center">
                 <div>
-                  <p className="font-medium text-gray-900">{item.page}</p>
-                  <p className="text-sm text-gray-600">{item.views} weergaven</p>
+                  <p className="font-medium text-black">{item.page}</p>
+                  <p className="text-sm text-black">{item.views} weergaven</p>
                 </div>
-                <span className="text-sm text-gray-500">{item.bounce}</span>
+                <span className="text-sm text-black">{item.bounce}</span>
               </div>
             ))}
           </div>
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Verkeersbronnen</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Verkeersbronnen</h3>
           <div className="space-y-3">
             {[
               { source: 'Organisch', percentage: 45, color: 'bg-green-500' },
@@ -445,8 +445,8 @@ function AnalyticsSection() {
             ].map((item, index) => (
               <div key={index}>
                 <div className="flex justify-between items-center mb-1">
-                  <span className="text-sm font-medium text-gray-700">{item.source}</span>
-                  <span className="text-sm text-gray-600">{item.percentage}%</span>
+                  <span className="text-sm font-medium text-black">{item.source}</span>
+                  <span className="text-sm text-black">{item.percentage}%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
@@ -467,11 +467,11 @@ function AnalyticsSection() {
 function LeadsSection() {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-900">Aanvragen & Leads</h2>
+      <h2 className="text-2xl font-bold text-black">Aanvragen & Leads</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Lead Overzicht</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Lead Overzicht</h3>
           <div className="space-y-4">
             <div className="grid grid-cols-3 gap-4 text-center">
               <div className="p-4 bg-green-50 rounded-lg">
@@ -489,15 +489,15 @@ function LeadsSection() {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-gray-600">Conversieratio</span>
+                <span className="text-black">Conversieratio</span>
                 <span className="font-semibold">3.2%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Gem. lead waarde</span>
+                <span className="text-black">Gem. lead waarde</span>
                 <span className="font-semibold">€2,450</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Response tijd</span>
+                <span className="text-black">Response tijd</span>
                 <span className="font-semibold">2.3 uur</span>
               </div>
             </div>
@@ -505,7 +505,7 @@ function LeadsSection() {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Recente Aanvragen</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Recente Aanvragen</h3>
           <div className="space-y-3">
             {[
               { name: 'Jan Jansen', type: 'Keuken offerte', source: 'Website', status: 'Nieuw', time: '2 uur geleden' },
@@ -517,7 +517,7 @@ function LeadsSection() {
               <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <p className="font-medium text-gray-900">{lead.name}</p>
+                    <p className="font-medium text-black">{lead.name}</p>
                     <span className={`inline-block px-2 py-1 text-xs rounded-full ${
                       lead.status === 'Nieuw' ? 'bg-green-100 text-green-800' :
                       lead.status === 'Bevestigd' ? 'bg-blue-100 text-blue-800' :
@@ -527,10 +527,10 @@ function LeadsSection() {
                       {lead.status}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600">{lead.type}</p>
+                  <p className="text-sm text-black">{lead.type}</p>
                   <div className="flex items-center justify-between mt-1">
-                    <span className="text-xs text-gray-500">Via: {lead.source}</span>
-                    <span className="text-xs text-gray-500">{lead.time}</span>
+                    <span className="text-xs text-black">Via: {lead.source}</span>
+                    <span className="text-xs text-black">{lead.time}</span>
                   </div>
                 </div>
               </div>
@@ -546,11 +546,11 @@ function LeadsSection() {
 function PerformanceSection() {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-900">Website Performance</h2>
+      <h2 className="text-2xl font-bold text-black">Website Performance</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">PageSpeed Insights</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">PageSpeed Insights</h3>
           <div className="space-y-4">
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center p-4 bg-green-50 rounded-lg">
@@ -568,15 +568,15 @@ function PerformanceSection() {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-gray-600">First Contentful Paint</span>
+                <span className="text-black">First Contentful Paint</span>
                 <span className="font-semibold">0.8s</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Largest Contentful Paint</span>
+                <span className="text-black">Largest Contentful Paint</span>
                 <span className="font-semibold">1.2s</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Cumulative Layout Shift</span>
+                <span className="text-black">Cumulative Layout Shift</span>
                 <span className="font-semibold">0.05</span>
               </div>
             </div>
@@ -584,7 +584,7 @@ function PerformanceSection() {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Technische SEO</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Technische SEO</h3>
           <div className="space-y-3">
             {[
               { item: 'SSL Certificate', status: 'Valid', score: '100%' },
@@ -595,8 +595,8 @@ function PerformanceSection() {
             ].map((item, index) => (
               <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div>
-                  <p className="font-medium text-gray-900">{item.item}</p>
-                  <p className="text-sm text-gray-600">{item.status}</p>
+                  <p className="font-medium text-black">{item.item}</p>
+                  <p className="text-sm text-black">{item.status}</p>
                 </div>
                 <span className="text-sm font-semibold text-green-600">{item.score}</span>
               </div>
@@ -706,7 +706,7 @@ function TasksSection() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900">Taken Management</h2>
+        <h2 className="text-2xl font-bold text-black">Taken Management</h2>
         <button
           onClick={() => setShowAddTask(true)}
           className="flex items-center px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600 transition-colors"
@@ -721,8 +721,8 @@ function TasksSection() {
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Totaal</p>
-              <p className="text-2xl font-bold text-gray-900">{totalTasks}</p>
+              <p className="text-sm font-medium text-black">Totaal</p>
+              <p className="text-2xl font-bold text-black">{totalTasks}</p>
             </div>
             <div className="p-3 bg-gray-100 rounded-lg">
               <CheckSquare className="h-6 w-6 text-gray-600" />
@@ -732,7 +732,7 @@ function TasksSection() {
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Voltooid</p>
+              <p className="text-sm font-medium text-black">Voltooid</p>
               <p className="text-2xl font-bold text-green-600">{completedTasks}</p>
             </div>
             <div className="p-3 bg-green-100 rounded-lg">
@@ -743,7 +743,7 @@ function TasksSection() {
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">In Uitvoering</p>
+              <p className="text-sm font-medium text-black">In Uitvoering</p>
               <p className="text-2xl font-bold text-blue-600">{tasks.filter(t => t.status === 'in-progress').length}</p>
             </div>
             <div className="p-3 bg-blue-100 rounded-lg">
@@ -754,7 +754,7 @@ function TasksSection() {
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Openstaand</p>
+              <p className="text-sm font-medium text-black">Openstaand</p>
               <p className="text-2xl font-bold text-yellow-600">{tasks.filter(t => t.status === 'pending').length}</p>
             </div>
             <div className="p-3 bg-yellow-100 rounded-lg">
@@ -770,7 +770,7 @@ function TasksSection() {
           <button
             onClick={() => setFilter('all')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              filter === 'all' ? 'bg-yellow-500 text-black' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              filter === 'all' ? 'bg-yellow-500 text-black' : 'bg-gray-100 text-black hover:bg-gray-200'
             }`}
           >
             Alle Taken
@@ -778,7 +778,7 @@ function TasksSection() {
           <button
             onClick={() => setFilter('pending')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              filter === 'pending' ? 'bg-yellow-500 text-black' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              filter === 'pending' ? 'bg-yellow-500 text-black' : 'bg-gray-100 text-black hover:bg-gray-200'
             }`}
           >
             Openstaand
@@ -786,7 +786,7 @@ function TasksSection() {
           <button
             onClick={() => setFilter('in-progress')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              filter === 'in-progress' ? 'bg-yellow-500 text-black' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              filter === 'in-progress' ? 'bg-yellow-500 text-black' : 'bg-gray-100 text-black hover:bg-gray-200'
             }`}
           >
             In Uitvoering
@@ -794,7 +794,7 @@ function TasksSection() {
           <button
             onClick={() => setFilter('completed')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              filter === 'completed' ? 'bg-yellow-500 text-black' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              filter === 'completed' ? 'bg-yellow-500 text-black' : 'bg-gray-100 text-black hover:bg-gray-200'
             }`}
           >
             Voltooid
@@ -805,7 +805,7 @@ function TasksSection() {
       {/* Tasks List */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
         <div className="p-6 border-b border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900">Taken Overzicht</h3>
+          <h3 className="text-lg font-semibold text-black">Taken Overzicht</h3>
         </div>
         <div className="divide-y divide-gray-200">
           {filteredTasks.map((task) => (
@@ -824,7 +824,7 @@ function TasksSection() {
                   </button>
                   <div className="flex-1">
                     <div className="flex items-center space-x-2 mb-2">
-                      <h4 className={`font-medium ${task.status === 'completed' ? 'line-through text-gray-500' : 'text-gray-900'}`}>
+                      <h4 className={`font-medium ${task.status === 'completed' ? 'line-through text-gray-500' : 'text-black'}`}>
                         {task.title}
                       </h4>
                       <span className={`inline-block px-2 py-1 text-xs rounded-full ${getPriorityColor(task.priority)}`}>
@@ -834,10 +834,10 @@ function TasksSection() {
                         {task.status === 'completed' ? 'Voltooid' : task.status === 'in-progress' ? 'In Uitvoering' : 'Openstaand'}
                       </span>
                     </div>
-                    <p className={`text-sm ${task.status === 'completed' ? 'text-gray-500' : 'text-gray-600'} mb-2`}>
+                    <p className={`text-sm ${task.status === 'completed' ? 'text-gray-500' : 'text-black'} mb-2`}>
                       {task.description}
                     </p>
-                    <div className="flex items-center space-x-4 text-xs text-gray-500">
+                    <div className="flex items-center space-x-4 text-xs text-black">
                       <div className="flex items-center">
                         <Clock className="h-3 w-3 mr-1" />
                         Deadline: {new Date(task.dueDate).toLocaleDateString('nl-NL')}
@@ -874,15 +874,15 @@ function TasksSection() {
 function SettingsSection() {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-900">Instellingen</h2>
+      <h2 className="text-2xl font-bold text-black">Instellingen</h2>
       
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Dashboard Instellingen</h3>
+        <h3 className="text-lg font-semibold text-black mb-4">Dashboard Instellingen</h3>
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-medium text-gray-900">E-mail notificaties</p>
-              <p className="text-sm text-gray-600">Ontvang dagelijkse rapporten</p>
+              <p className="font-medium text-black">E-mail notificaties</p>
+              <p className="text-sm text-black">Ontvang dagelijkse rapporten</p>
             </div>
             <button className="relative inline-flex h-6 w-11 items-center rounded-full bg-yellow-500">
               <span className="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-6"></span>
@@ -890,8 +890,8 @@ function SettingsSection() {
           </div>
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-medium text-gray-900">Automatische updates</p>
-              <p className="text-sm text-gray-600">Update data elke 6 uur</p>
+              <p className="font-medium text-black">Automatische updates</p>
+              <p className="text-sm text-black">Update data elke 6 uur</p>
             </div>
             <button className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300">
               <span className="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-1"></span>
@@ -899,8 +899,8 @@ function SettingsSection() {
           </div>
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-medium text-gray-900">Dark mode</p>
-              <p className="text-sm text-gray-600">Schakel donkere modus in</p>
+              <p className="font-medium text-black">Dark mode</p>
+              <p className="text-sm text-black">Schakel donkere modus in</p>
             </div>
             <button className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300">
               <span className="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-1"></span>
