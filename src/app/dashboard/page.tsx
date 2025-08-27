@@ -29,7 +29,14 @@ import {
   User,
   Smartphone,
   Monitor,
-  Building
+  Building,
+  Link,
+  ExternalLink,
+  CheckCircle,
+  AlertCircle,
+  RefreshCw,
+  Key,
+  Database
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -47,6 +54,7 @@ export default function Dashboard() {
     { id: 'demographics', label: 'Demografie', icon: User },
     { id: 'tasks', label: 'Taken', icon: CheckSquare },
     { id: 'files', label: 'Bestanden', icon: Folder },
+    { id: 'api', label: 'API Koppelingen', icon: Link },
     { id: 'settings', label: 'Instellingen', icon: Settings },
   ];
 
@@ -70,6 +78,8 @@ export default function Dashboard() {
         return <TasksSection />;
       case 'files':
         return <FilesSection />;
+      case 'api':
+        return <APISection />;
       case 'settings':
         return <SettingsSection />;
       default:
@@ -1524,6 +1534,404 @@ function DemographicsSection() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+// API Connections Section Component
+function APISection() {
+  const [connections, setConnections] = useState({
+    webmasterTools: {
+      connected: true,
+      lastSync: '2025-01-12T10:30:00',
+      status: 'active',
+      dataPoints: 1247,
+      errors: 0
+    },
+    pageSpeedInsights: {
+      connected: true,
+      lastSync: '2025-01-12T09:15:00',
+      status: 'active',
+      dataPoints: 892,
+      errors: 0
+    },
+    googleAnalytics: {
+      connected: true,
+      lastSync: '2025-01-12T11:45:00',
+      status: 'active',
+      dataPoints: 2847,
+      errors: 0
+    },
+    googleAds: {
+      connected: false,
+      lastSync: null,
+      status: 'disconnected',
+      dataPoints: 0,
+      errors: 0
+    }
+  });
+
+  const [showConnectModal, setShowConnectModal] = useState(false);
+  const [selectedService, setSelectedService] = useState('');
+
+  const services = [
+    {
+      id: 'webmasterTools',
+      name: 'Google Search Console',
+      description: 'SEO data en zoekresultaten',
+      icon: Search,
+      color: 'bg-blue-500',
+      status: connections.webmasterTools.status,
+      lastSync: connections.webmasterTools.lastSync,
+      dataPoints: connections.webmasterTools.dataPoints,
+      connected: connections.webmasterTools.connected
+    },
+    {
+      id: 'pageSpeedInsights',
+      name: 'Google PageSpeed Insights',
+      description: 'Website performance metrics',
+      icon: Globe,
+      color: 'bg-green-500',
+      status: connections.pageSpeedInsights.status,
+      lastSync: connections.pageSpeedInsights.lastSync,
+      dataPoints: connections.pageSpeedInsights.dataPoints,
+      connected: connections.pageSpeedInsights.connected
+    },
+    {
+      id: 'googleAnalytics',
+      name: 'Google Analytics',
+      description: 'Website bezoekers en gedrag',
+      icon: BarChart3,
+      color: 'bg-purple-500',
+      status: connections.googleAnalytics.status,
+      lastSync: connections.googleAnalytics.lastSync,
+      dataPoints: connections.googleAnalytics.dataPoints,
+      connected: connections.googleAnalytics.connected
+    },
+    {
+      id: 'googleAds',
+      name: 'Google Ads',
+      description: 'SEA campagnes en prestaties',
+      icon: TrendingUp,
+      color: 'bg-red-500',
+      status: connections.googleAds.status,
+      lastSync: connections.googleAds.lastSync,
+      dataPoints: connections.googleAds.dataPoints,
+      connected: connections.googleAds.connected
+    }
+  ];
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'active': return 'bg-green-100 text-green-800';
+      case 'disconnected': return 'bg-red-100 text-red-800';
+      case 'error': return 'bg-yellow-100 text-yellow-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'active': return <CheckCircle className="h-5 w-5 text-green-600" />;
+      case 'disconnected': return <AlertCircle className="h-5 w-5 text-red-600" />;
+      case 'error': return <AlertCircle className="h-5 w-5 text-yellow-600" />;
+      default: return <AlertCircle className="h-5 w-5 text-gray-600" />;
+    }
+  };
+
+  const handleConnect = (serviceId: string) => {
+    setSelectedService(serviceId);
+    setShowConnectModal(true);
+  };
+
+  const handleDisconnect = (serviceId: string) => {
+    setConnections(prev => ({
+      ...prev,
+      [serviceId]: {
+        ...prev[serviceId as keyof typeof prev],
+        connected: false,
+        status: 'disconnected',
+        lastSync: null,
+        dataPoints: 0
+      }
+    }));
+  };
+
+  const handleRefresh = (serviceId: string) => {
+    // Simulate refresh
+    const now = new Date().toISOString();
+    setConnections(prev => ({
+      ...prev,
+      [serviceId]: {
+        ...prev[serviceId as keyof typeof prev],
+        lastSync: now
+      }
+    }));
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold text-black">API Koppelingen</h2>
+        <button
+          onClick={() => setShowConnectModal(true)}
+          className="flex items-center px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600 transition-colors"
+        >
+          <Plus size={20} className="mr-2" />
+          Nieuwe Koppeling
+        </button>
+      </div>
+
+      {/* Connection Status Overview */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-black">Actieve Koppelingen</p>
+              <p className="text-2xl font-bold text-green-600">
+                {Object.values(connections).filter(c => c.connected).length}
+              </p>
+            </div>
+            <div className="p-3 bg-green-100 rounded-lg">
+              <Link className="h-6 w-6 text-green-600" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-black">Totaal Data Punten</p>
+              <p className="text-2xl font-bold text-blue-600">
+                {Object.values(connections).reduce((sum, c) => sum + c.dataPoints, 0)}
+              </p>
+            </div>
+            <div className="p-3 bg-blue-100 rounded-lg">
+              <Database className="h-6 w-6 text-blue-600" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-black">Laatste Sync</p>
+              <p className="text-2xl font-bold text-purple-600">
+                {new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}
+              </p>
+            </div>
+            <div className="p-3 bg-purple-100 rounded-lg">
+              <RefreshCw className="h-6 w-6 text-purple-600" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-black">API Fouten</p>
+              <p className="text-2xl font-bold text-red-600">
+                {Object.values(connections).reduce((sum, c) => sum + c.errors, 0)}
+              </p>
+            </div>
+            <div className="p-3 bg-red-100 rounded-lg">
+              <AlertCircle className="h-6 w-6 text-red-600" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* API Services */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {services.map((service) => {
+          const Icon = service.icon;
+          return (
+            <div key={service.id} className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <div className={`p-3 rounded-lg ${service.color}`}>
+                    <Icon className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-black">{service.name}</h3>
+                    <p className="text-sm text-black">{service.description}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  {getStatusIcon(service.status)}
+                  <span className={`inline-block px-2 py-1 text-xs rounded-full ${getStatusColor(service.status)}`}>
+                    {service.status === 'active' ? 'Actief' : service.status === 'disconnected' ? 'Niet gekoppeld' : 'Fout'}
+                  </span>
+                </div>
+              </div>
+
+              <div className="space-y-3 mb-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-black">Data punten:</span>
+                  <span className="font-semibold text-black">{service.dataPoints.toLocaleString()}</span>
+                </div>
+                {service.lastSync && (
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-black">Laatste sync:</span>
+                    <span className="text-sm text-black">
+                      {new Date(service.lastSync).toLocaleString('nl-NL')}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex items-center space-x-2">
+                {service.connected ? (
+                  <>
+                    <button
+                      onClick={() => handleRefresh(service.id)}
+                      className="flex items-center px-3 py-2 text-sm bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors"
+                    >
+                      <RefreshCw className="h-4 w-4 mr-1" />
+                      Vernieuwen
+                    </button>
+                    <button
+                      onClick={() => handleDisconnect(service.id)}
+                      className="flex items-center px-3 py-2 text-sm bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
+                    >
+                      <Trash2 className="h-4 w-4 mr-1" />
+                      Verbreken
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => handleConnect(service.id)}
+                    className="flex items-center px-3 py-2 text-sm bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
+                  >
+                    <Link className="h-4 w-4 mr-1" />
+                    Koppelen
+                  </button>
+                )}
+                <button className="flex items-center px-3 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                  <ExternalLink className="h-4 w-4 mr-1" />
+                  Beheren
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* API Documentation */}
+      <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+        <h3 className="text-lg font-semibold text-black mb-4">API Documentatie</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 className="font-medium text-black mb-2">Google Search Console</h4>
+            <p className="text-sm text-black mb-2">
+              Koppel uw Google Search Console account om SEO data en zoekresultaten te synchroniseren.
+            </p>
+            <ul className="text-xs text-black space-y-1">
+              <li>• Zoekresultaten en posities</li>
+              <li>• Clicks en impressies</li>
+              <li>• Core Web Vitals data</li>
+              <li>• Mobile usability rapporten</li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-medium text-black mb-2">Google PageSpeed Insights</h4>
+            <p className="text-sm text-black mb-2">
+              Monitor website performance en Core Web Vitals scores in real-time.
+            </p>
+            <ul className="text-xs text-black space-y-1">
+              <li>• PageSpeed scores</li>
+              <li>• Core Web Vitals metrics</li>
+              <li>• Performance verbeteringen</li>
+              <li>• Mobile en desktop data</li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-medium text-black mb-2">Google Analytics</h4>
+            <p className="text-sm text-black mb-2">
+              Synchroniseer bezoekersdata en gedragsanalyses voor uitgebreide inzichten.
+            </p>
+            <ul className="text-xs text-black space-y-1">
+              <li>• Bezoekers en sessies</li>
+              <li>• Verkeersbronnen</li>
+              <li>• Doelgroep data</li>
+              <li>• Conversie tracking</li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-medium text-black mb-2">Google Ads</h4>
+            <p className="text-sm text-black mb-2">
+              Koppel uw Google Ads account voor SEA campagne monitoring en optimalisatie.
+            </p>
+            <ul className="text-xs text-black space-y-1">
+              <li>• Campagne prestaties</li>
+              <li>• Kosten en ROI data</li>
+              <li>• Keyword prestaties</li>
+              <li>• Advertentie statistieken</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Connection Modal */}
+      {showConnectModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold text-black mb-4">
+              Koppel {selectedService ? services.find(s => s.id === selectedService)?.name : 'Service'}
+            </h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-black mb-2">API Key</label>
+                <input
+                  type="password"
+                  placeholder="Voer uw API key in"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-black mb-2">Account ID</label>
+                <input
+                  type="text"
+                  placeholder="Voer uw account ID in"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                />
+              </div>
+              <div className="flex items-center space-x-2">
+                <input type="checkbox" id="autoSync" className="rounded" />
+                <label htmlFor="autoSync" className="text-sm text-black">
+                  Automatische synchronisatie inschakelen
+                </label>
+              </div>
+            </div>
+            <div className="flex items-center justify-end space-x-3 mt-6">
+              <button
+                onClick={() => setShowConnectModal(false)}
+                className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+              >
+                Annuleren
+              </button>
+              <button
+                onClick={() => {
+                  // Simulate connection
+                  if (selectedService) {
+                    setConnections(prev => ({
+                      ...prev,
+                      [selectedService]: {
+                        ...prev[selectedService as keyof typeof prev],
+                        connected: true,
+                        status: 'active',
+                        lastSync: new Date().toISOString(),
+                        dataPoints: Math.floor(Math.random() * 1000) + 500
+                      }
+                    }));
+                  }
+                  setShowConnectModal(false);
+                }}
+                className="px-4 py-2 text-sm bg-yellow-500 text-black rounded-lg hover:bg-yellow-600 transition-colors"
+              >
+                Koppelen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
